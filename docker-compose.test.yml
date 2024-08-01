@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  app_test:
+    build:
+      context: .
+      dockerfile: ./docker/test/Dockerfile
+    environment:
+      NODE_ENV: development
+      DB_HOST: 'db_test'
+      DB_NAME: 'billing'
+      DB_PASSWORD: 'root'
+      LOGSTASH_ADDRESS: '<ip>'
+      LOGSTASH_PORT: 5044
+      ANALYTICS_HOST: 'http://<ip>:<port>'
+      SITE_ADDRESS: 'http://<ip>:<port>'
+    ports:
+      - '4001:3000'
+    restart: on-failure
+
+  db_test:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: username
+      POSTGRES_DB: billing
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./tmp/db-data:/var/lib/postgresql/data

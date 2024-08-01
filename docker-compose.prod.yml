@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  app_prod:
+    build:
+      context: .
+      dockerfile: ./docker/prod/Dockerfile
+    environment:
+      NODE_ENV: production
+      DB_HOST: '<private_ip>'
+      DB_NAME: 'billing'
+      DB_PASSWORD: '******'
+      LOGSTASH_ADDRESS: '<ip>'
+      LOGSTASH_PORT: 5044
+      ANALYTICS_HOST: 'http://<ip>:<port>'
+      SITE_ADDRESS: 'https://mysite.com'
+    ports:
+      - '4001:3000'
+    restart: on-failure

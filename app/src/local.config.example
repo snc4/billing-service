@@ -1,0 +1,21 @@
+export const stripeSecrets = {
+  apiKey: 'sk_test_********',
+  webhookKeys: {
+    checkoutSessionCompleted: 'whsec_*******',
+    invoicePaid: 'whsec_*******',
+    customerSubscriptionUpdated: 'whsec_*******',
+    customerSubscriptionCreated: 'whsec_*******',
+    customerSubscriptionDeleted: 'whsec_*******',
+    chargeRefunded: 'whsec_*******',
+    chargeRefundUpdated: 'whsec_*******',
+  },
+  webhookTestKey: 'whsec_*******',
+};
+
+export const paddleSecrets = {
+  apiKey: '*********',
+  secretKey: '*********',
+  frontendToken: '********',
+};
+
+export const analyticsSecret = 'secret';

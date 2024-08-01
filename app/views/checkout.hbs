@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+</head>
+<body>
+  <div class="checkout-container"></div>
+
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script>
+    Paddle.Environment.set('{{ config.env }}');
+    Paddle.Initialize({
+      token: '{{ config.token }}',
+      checkout: {
+        settings: {
+          displayMode: 'inline',
+          frameTarget: 'checkout-container',
+          frameInitialHeight: '450',
+          frameStyle: 'width: 100%;',
+        }
+      }
+    });
+
+    Paddle.Checkout.open({
+      items: [
+        {
+          priceId: '{{ config.priceId }}',
+          quantity: 1,
+        }
+      ],
+      customData: {
+        uid: {{ metadata.uid }},
+        product_code: {{ metadata.productCode }},
+      },
+    })
+  </script>
+</body>
+</html>

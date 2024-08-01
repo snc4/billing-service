@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/dev/Dockerfile
+    environment:
+      NODE_ENV: development
+      DB_HOST: 'db'
+      DB_NAME: 'billing'
+      DB_PASSWORD: 'root'
+      LOGSTASH_ADDRESS: '<ip>'
+      LOGSTASH_PORT: 5044
+      ANALYTICS_HOST: 'http://<ip>:<port>'
+      SITE_ADDRESS: 'http://localhost:3000'
+    ports:
+      - '4001:3000'
+    volumes:
+      - ./app:/app
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: billing
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./tmp/db-data:/var/lib/postgresql/data
